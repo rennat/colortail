@@ -150,9 +150,19 @@ void TailFile::print(int n)
 
 void TailFile::printFilename()
 {
-   // prints the filename to stdout
-
-   cout << "==> " << m_filename << " <==" << endl;
+   // build the filename header   
+   char buffer[strlen(m_filename) + 10];
+   strcpy(buffer, "==> ");
+   strcat(buffer, m_filename);
+   strcat(buffer, " <==");
+   strcat(buffer, "\n");
+   
+   // convert it to a const char *
+   string str(buffer);
+   const char *c = str.c_str();
+   
+   // colorize and print it
+   print_to_stdout(c);
 }
 
 char* TailFile::get_filename()
